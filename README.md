@@ -13,6 +13,7 @@ _All versioned white papers above are the original texts moved from the reposito
 - [Architecture Decision Records](adr/) capture major design choices and how to propose changes.
 - [Open Questions](adr/open-questions.md) tracks unresolved items with owners and next steps.
 - [Changelog](docs/CHANGELOG.md) summarizes how each version evolves to reduce confusion when comparing documents.
+- [Proposal playbook](docs/proposals/README.md) explains when and how to draft proposals before promoting them to ADRs.
 
 ## Contributing
 Review [CONTRIBUTING.md](CONTRIBUTING.md) before opening changes. Issue and PR templates prompt you to note which documents you touch and the risks considered.
