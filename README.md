@@ -1,8 +1,9 @@
 # Kernel Wallet Documentation Index
 
-This repository collects the evolving Kernel Wallet design. Start with the latest architecture and threat model, then dive into prior versions for historical context.
+This repository collects the evolving Kernel Wallet design. Start with the latest cryptography guidance and architecture/threat model, then dive into prior versions for historical context.
 
 ## Document map (latest first)
+- [v4 Cryptography & Key Management](docs/v4-cryptography/README.md) — deterministic primitives, key lifecycles, storage encryption, and operational controls that reinforce the v3 trust boundaries before implementation.
 - [v3 Architecture & Trust Boundaries](docs/v3-architecture/README.md) — current component layout, trust boundaries, and attack surface assumptions. See the accompanying [diagrams](docs/v3-architecture/diagrams.md).
 - [v2 Model & Security Boundaries](docs/v2-threat-model/README.md) — threat model and security considerations that informed the v3 update.
 - [v1 Foundations](docs/v1-foundations/README.md) — original white paper outlining the core concept.
@@ -34,6 +35,8 @@ stay in memory for the current session only. Features include:
   staged.
 - Bring-your-own node endpoints with TLS opt-in for each asset.
 - Explicit confirmation prompts so signing flows are never triggered implicitly.
+- Send actions stay disabled until you load a wallet profile and assign a node for the selected
+  asset, reinforcing the self-custodial, offline-first flow.
 
 Run the client with Python and Tkinter (no external dependencies):
 
