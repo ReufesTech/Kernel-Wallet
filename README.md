@@ -13,6 +13,7 @@ _All versioned white papers above are the original texts moved from the reposito
 - [Architecture Decision Records](adr/) capture major design choices and how to propose changes.
 - [Open Questions](adr/open-questions.md) tracks unresolved items with owners and next steps.
 - [Changelog](docs/CHANGELOG.md) summarizes how each version evolves to reduce confusion when comparing documents.
+- [Creation review](docs/creation-review.md) lists the concrete deliverables and proposals needed for the minimal wallet slice.
 
 ## Contributing
 Review [CONTRIBUTING.md](CONTRIBUTING.md) before opening changes. Issue and PR templates prompt you to note which documents you touch and the risks considered.
