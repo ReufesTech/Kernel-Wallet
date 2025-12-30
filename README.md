@@ -21,3 +21,29 @@ Review [CONTRIBUTING.md](CONTRIBUTING.md) before opening changes. Issue and PR t
 ## Planning and validation
 - [Roadmap](docs/roadmap.md) lays out milestones that align with threat-model assumptions.
 - [Testing Strategy](docs/testing-strategy.md) describes unit, property, integration, and manual checks ahead of implementation.
+
+## Desktop client for Litecoin (LTC) and Monero (XMR)
+A local-only desktop client lives in `gui/` to illustrate how the UI can delegate
+validation to an offline engine while keeping seed material and signing inputs
+within the device boundary described in the v3 architecture. The client is
+self-custodial: users must provide their own wallet name and seed phrase, which
+stay in memory for the current session only. Features include:
+
+- Asset toggle between LTC and XMR with per-asset balances and addresses.
+- Local validation of recipient, amount, fee bounds, and node connectivity before any transaction is
+  staged.
+- Bring-your-own node endpoints with TLS opt-in for each asset.
+- Explicit confirmation prompts so signing flows are never triggered implicitly.
+
+Run the client with Python and Tkinter (no external dependencies):
+
+```bash
+python gui/wallet_gui.py
+```
+
+The client does not make network calls; it prepares transactions locally so the
+engine can later be swapped for a fully verified implementation. To interact
+with mainnet or testnet you must point the engine at your own trusted
+Litecoin/Monero node; no shared infrastructure is bundled. Seed phrases and
+wallet names are collected only to keep the flow self-custodial—no data leaves
+the local process.
