@@ -219,9 +219,10 @@ class WalletGUI:
             text="No shared infrastructure; connect your own node before broadcasting.",
             style="Subtitle.TLabel",
         ).pack(side="left", padx=(0, 12))
-        ttk.Button(action_row, text="Send", style="Accent.TButton", command=self._confirm_and_send).pack(
-            side="right"
+        self.send_button = ttk.Button(
+            action_row, text="Send", style="Accent.TButton", command=self._confirm_and_send
         )
+        self.send_button.pack(side="right")
 
         log_frame = ttk.Labelframe(outer, text="Activity", style="Card.TLabelframe")
         log_frame.pack(fill="both", expand=True, pady=(8, 0))
@@ -258,6 +259,7 @@ class WalletGUI:
         else:
             self.node_status.config(text="No node configured for this asset.")
         self._last_symbol = symbol
+        self._update_send_button_state()
 
     def _switch_asset(self, symbol: str) -> None:
         self.selected_symbol.set(symbol)
@@ -339,6 +341,7 @@ class WalletGUI:
             text=f"Loaded wallet '{profile.name}'. Seed stays local to this session."
         )
         self._append_log("Wallet profile loaded locally for self-custody.")
+        self._update_send_button_state()
 
     def _save_node(self) -> None:
         symbol = self.selected_symbol.get()
@@ -354,6 +357,16 @@ class WalletGUI:
         self._node_values[symbol] = endpoint
         self.node_status.config(text=f"{symbol} node set to {node.display_label()}")
         self._append_log(f"Updated {symbol} node endpoint to {node.display_label()}.")
+        self._update_send_button_state()
+
+    def _update_send_button_state(self) -> None:
+        symbol = self.selected_symbol.get()
+        has_profile = self.engine.has_profile()
+        has_node = self.engine.get_node(symbol) is not None
+        if has_profile and has_node:
+            self.send_button.state(["!disabled"])
+        else:
+            self.send_button.state(["disabled"])
 
 
 def main() -> None:
